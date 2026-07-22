@@ -56,7 +56,7 @@ const photos = [
 
         title: "○○市場",
 
-        image: "images/photo3.JPG",
+        image: "images/photo3.jpg",
 
         location: "福岡県○○市",
 
