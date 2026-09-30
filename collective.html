@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Collective Trace | Last Trace</title>
+
+    <link rel="stylesheet"
+          href="collective.css">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500&display=swap"
+          rel="stylesheet">
+
+</head>
+
+
+<body>
+
+
+<header class="collective-header">
+
+    <a href="index.html"
+       class="logo">
+
+        Last Trace
+
+    </a>
+
+    <a href="submit.html"
+       class="submit-link">
+
+        Submit
+
+    </a>
+
+</header>
+
+
+
+<main>
+
+
+<section class="collective-intro">
+
+    <p class="eyebrow">
+        COLLECTIVE TRACE
+    </p>
+
+    <h1>
+        消えそうな風景を、
+        <br>
+        みんなで残す。
+    </h1>
+
+    <p class="intro-text">
+
+        ここには、
+        誰かが「消えてほしくない」と思った
+        風景が集まっています。
+
+        <br><br>
+
+        いつか変わってしまう場所。
+        なくなってしまうかもしれない景色。
+
+        <br>
+
+        その一つひとつを、
+        ひとつの記録として残します。
+
+    </p>
+
+</section>
+
+
+
+<section class="trace-list"
+         id="trace-list">
+
+    <p class="loading">
+        Loading traces...
+    </p>
+
+</section>
+
+
+</main>
+
+
+
+<footer class="collective-footer">
+
+    <p>
+        LAST TRACE
+    </p>
+
+</footer>
+
+
+
+<!-- Supabase -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+
+/* =================================
+   Supabase
+================================= */
+
+const SUPABASE_URL =
+    "https://grfpzsdubljjerefdttt.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_7bj77YZFY84b-XeSHtIhBQ_esMCE3E2";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+
+/* =================================
+   投稿一覧を取得
+================================= */
+
+async function loadTraces() {
+
+
+    const traceList =
+        document.getElementById("trace-list");
+
+
+    try {
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+
+                .from("traces")
+
+                .select("*")
+
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                );
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        /* 投稿がない場合 */
+
+        if (!data || data.length === 0) {
+
+            traceList.innerHTML = `
+
+                <p class="empty">
+
+                    まだ投稿された風景はありません。
+
+                </p>
+
+            `;
+
+            return;
+
+        }
+
+
+
+        /* =================================
+           投稿をHTMLに変換
+        ================================= */
+
+        traceList.innerHTML = "";
+
+
+        data.forEach(trace => {
+
+
+            const article =
+                document.createElement("article");
+
+
+            article.className =
+                "trace-item";
+
+
+            article.innerHTML = `
+
+                <div class="trace-image">
+
+                    <img
+                        src="${trace.image_url}"
+                        alt="${escapeHtml(trace.title)}"
+                        loading="lazy"
+                    >
+
+                </div>
+
+
+                <div class="trace-info">
+
+
+                    <p class="trace-number">
+
+                        TRACE
+
+                    </p>
+
+
+                    <h2>
+
+                        ${escapeHtml(trace.title)}
+
+                    </h2>
+
+
+                    <div class="trace-meta">
+
+                        ${
+                            trace.location
+                                ? `<span>${escapeHtml(trace.location)}</span>`
+                                : ""
+                        }
+
+                        ${
+                            trace.date
+                                ? `<span>${escapeHtml(trace.date)}</span>`
+                                : ""
+                        }
+
+                    </div>
+
+
+                    <p class="trace-memory">
+
+                        ${escapeHtml(trace.memory)}
+
+                    </p>
+
+
+                    ${
+                        trace.name
+                            ? `
+                                <p class="trace-name">
+
+                                    — ${escapeHtml(trace.name)}
+
+                                </p>
+                              `
+                            : ""
+                    }
+
+
+                </div>
+
+            `;
+
+
+            traceList.appendChild(article);
+
+        });
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(
+            "投稿取得エラー:",
+            error
+        );
+
+
+        traceList.innerHTML = `
+
+            <div class="error">
+
+                <p>
+                    投稿を読み込めませんでした。
+                </p>
+
+                <small>
+                    Consoleを確認してください。
+                </small>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+
+/* =================================
+   HTMLエスケープ
+================================= */
+
+function escapeHtml(value) {
+
+
+    if (!value) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+/* =================================
+   実行
+================================= */
+
+loadTraces();
+
+
+</script>
+
+
+</body>
+
+</html>

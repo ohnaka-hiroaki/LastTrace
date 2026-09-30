@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Your Trace | Last Trace</title>
+
+    <link rel="stylesheet" href="submit.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+
+
+<body>
+
+
+<header class="submit-header">
+
+    <a href="index.html" class="logo">
+        Last Trace
+    </a>
+
+    <a href="index.html" class="back-link">
+        Back
+    </a>
+
+</header>
+
+
+
+<main class="submit-container">
+
+
+    <section class="submit-intro">
+
+        <p class="eyebrow">
+            YOUR TRACE
+        </p>
+
+        <h1>
+            あなたが残したい<br>
+            風景はありますか？
+        </h1>
+
+        <p class="intro-text">
+            いつか消えてしまうかもしれない風景。<br>
+            あなたにとって、残しておきたい風景を教えてください。
+        </p>
+
+    </section>
+
+
+
+    <section class="submit-form-area">
+
+
+        <form id="trace-form">
+
+
+            <!-- 写真 -->
+
+            <div class="form-group">
+
+                <label for="photo">
+                    PHOTO
+                    <span>風景の写真</span>
+                </label>
+
+                <div class="photo-upload">
+
+                    <input
+                        type="file"
+                        id="photo"
+                        name="photo"
+                        accept="image/*"
+                        required
+                    >
+
+                    <label for="photo" class="upload-button">
+                        写真を選択
+                    </label>
+
+                    <p id="file-name">
+                        JPG / PNG / WEBP
+                    </p>
+
+                </div>
+
+                <div id="preview-area">
+                    <img id="preview-image" src="" alt="">
+                </div>
+
+            </div>
+
+
+
+            <!-- 風景の名前 -->
+
+            <div class="form-group">
+
+                <label for="title">
+                    NAME
+                    <span>この風景の名前</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="例：駅前の古い商店"
+                    maxlength="50"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- 場所 -->
+
+            <div class="form-group">
+
+                <label for="location">
+                    LOCATION
+                    <span>場所</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    placeholder="例：福岡県○○市"
+                    maxlength="100"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- 撮影時期 -->
+
+            <div class="form-group">
+
+                <label for="date">
+                    DATE
+                    <span>撮影した時期</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="date"
+                    name="date"
+                    placeholder="例：2026年8月"
+                    maxlength="30"
+                >
+
+            </div>
+
+
+
+            <!-- 理由 -->
+
+            <div class="form-group">
+
+                <label for="memory">
+                    MEMORY
+                    <span>あなたにとって、この風景は？</span>
+                </label>
+
+                <textarea
+                    id="memory"
+                    name="memory"
+                    rows="6"
+                    maxlength="500"
+                    placeholder="この風景を残したいと思った理由や、思い出を書いてください。"
+                    required
+                ></textarea>
+
+                <div class="character-count">
+                    <span id="count">0</span> / 500
+                </div>
+
+            </div>
+
+
+
+            <!-- 投稿者 -->
+
+            <div class="form-group">
+
+                <label for="name">
+                    NAME
+                    <span>名前（任意）</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="匿名でも投稿できます"
+                    maxlength="30"
+                >
+
+            </div>
+
+
+
+            <button
+                type="submit"
+                class="submit-button"
+            >
+
+                <span>TRACE</span>
+
+                <span class="arrow">→</span>
+
+            </button>
+
+
+        </form>
+
+
+    </section>
+
+
+
+    <section
+        id="complete-message"
+        class="complete-message"
+    >
+
+        <p class="eyebrow">
+            TRACE RECORDED
+        </p>
+
+        <h2>
+            あなたの風景を<br>
+            記録しました。
+        </h2>
+
+        <p>
+            一つの風景が、<br>
+            一つの記憶として残りました。
+        </p>
+
+        <a href="index.html">
+            Last Traceへ戻る
+        </a>
+
+    </section>
+
+
+</main>
+
+
+
+<footer class="submit-footer">
+
+    <p>
+        LAST TRACE
+    </p>
+
+    <span>
+        Collecting vanishing landscapes.
+    </span>
+
+</footer>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL = "https://grfpzsdubljjerefdttt.supabase.co";
+const SUPABASE_KEY = "sb_publishable_7bj77YZFY84b-XeSHtIhBQ_esMCE3E2";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+const form =
+    document.getElementById("trace-form");
+
+const photoInput =
+    document.getElementById("photo");
+
+const fileName =
+    document.getElementById("file-name");
+
+const previewArea =
+    document.getElementById("preview-area");
+
+const previewImage =
+    document.getElementById("preview-image");
+
+const memory =
+    document.getElementById("memory");
+
+const count =
+    document.getElementById("count");
+
+const completeMessage =
+    document.getElementById("complete-message");
+
+
+/* ==========================
+   Photo Preview
+========================== */
+
+photoInput.addEventListener("change", function () {
+
+    const file = this.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    fileName.textContent = file.name;
+
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+
+        previewImage.src =
+            event.target.result;
+
+        previewArea.classList.add("show");
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
+
+/* ==========================
+   Character Count
+========================== */
+
+memory.addEventListener("input", function () {
+
+    count.textContent =
+        this.value.length;
+
+});
+
+
+/* ==========================
+   Submit
+========================== */
+
+form.addEventListener("submit", async function (event) {
+
+    event.preventDefault();
+
+
+    const file =
+        photoInput.files[0];
+
+    const title =
+        document.getElementById("title").value.trim();
+
+    const location =
+        document.getElementById("location").value.trim();
+
+    const date =
+        document.getElementById("date").value.trim();
+
+    const memoryText =
+        document.getElementById("memory").value.trim();
+
+    const name =
+        document.getElementById("name").value.trim();
+
+
+    if (!file) {
+
+        alert("写真を選択してください。");
+
+        return;
+
+    }
+
+
+    try {
+
+        /*
+         * 1. ファイル名を作る
+         */
+
+        const fileExtension =
+            file.name.split(".").pop();
+
+        const fileName =
+            `${Date.now()}-${crypto.randomUUID()}.${fileExtension}`;
+
+
+        /*
+         * 2. Storageへ写真をアップロード
+         */
+
+        const {
+            data: uploadData,
+            error: uploadError
+        } =
+            await supabaseClient
+                .storage
+                .from("traces")
+                .upload(
+                    fileName,
+                    file
+                );
+
+
+        if (uploadError) {
+
+            throw uploadError;
+
+        }
+
+
+        /*
+         * 3. 写真URLを取得
+         */
+
+        const {
+            data: imageData
+        } =
+            supabaseClient
+                .storage
+                .from("traces")
+                .getPublicUrl(fileName);
+
+
+        const imageUrl =
+            imageData.publicUrl;
+
+
+        /*
+         * 4. データベースへ保存
+         */
+
+        const {
+            error: databaseError
+        } =
+            await supabaseClient
+                .from("traces")
+                .insert({
+
+                    title: title,
+
+                    location: location,
+
+                    date: date,
+
+                    memory: memoryText,
+
+                    name: name,
+
+                    image_url: imageUrl
+
+                });
+
+
+        if (databaseError) {
+
+            throw databaseError;
+
+        }
+
+
+        /*
+         * 5. 完了画面
+         */
+
+        form.style.display = "none";
+
+        completeMessage.classList.add("show");
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "投稿に失敗しました。\n" +
+            "もう一度試してください。"
+        );
+
+    }
+
+});
+
+</script>
+
+
+</body>
+
+</html>

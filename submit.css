@@ -1,0 +1,723 @@
+/* ===================================
+   Last Trace
+   Your Trace
+=================================== */
+
+
+/* ==========================
+   Reset
+========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    background: #080808;
+
+    color: #ffffff;
+
+    font-family:
+        "Noto Sans JP",
+        sans-serif;
+
+    font-weight: 300;
+
+    min-height: 100vh;
+
+}
+
+
+
+/* ==========================
+   Header
+========================== */
+
+.submit-header {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    padding: 35px 60px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    z-index: 10;
+
+}
+
+
+.logo {
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 32px;
+
+    letter-spacing: 3px;
+
+}
+
+
+.back-link {
+
+    color: #aaa;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    transition: 0.3s;
+
+}
+
+
+.back-link:hover {
+
+    color: #ffffff;
+
+}
+
+
+
+/* ==========================
+   Container
+========================== */
+
+.submit-container {
+
+    width: 90%;
+
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding-top: 180px;
+
+    padding-bottom: 120px;
+
+}
+
+
+
+/* ==========================
+   Intro
+========================== */
+
+.submit-intro {
+
+    margin-bottom: 100px;
+
+}
+
+
+.eyebrow {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 14px;
+
+    letter-spacing: 5px;
+
+    color: #888;
+
+    margin-bottom: 30px;
+
+}
+
+
+.submit-intro h1 {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: clamp(42px, 6vw, 72px);
+
+    font-weight: 300;
+
+    line-height: 1.25;
+
+    letter-spacing: 2px;
+
+}
+
+
+.intro-text {
+
+    margin-top: 35px;
+
+    color: #aaa;
+
+    font-size: 14px;
+
+    line-height: 2;
+
+}
+
+
+
+/* ==========================
+   Form
+========================== */
+
+.form-group {
+
+    margin-bottom: 70px;
+
+}
+
+
+.form-group > label {
+
+    display: block;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 20px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.form-group > label span {
+
+    font-family:
+        "Noto Sans JP",
+        sans-serif;
+
+    font-size: 11px;
+
+    color: #777;
+
+    letter-spacing: 1px;
+
+    margin-left: 15px;
+
+}
+
+
+
+/* ==========================
+   Inputs
+========================== */
+
+input[type="text"],
+textarea {
+
+    width: 100%;
+
+    background: transparent;
+
+    border: none;
+
+    border-bottom: 1px solid #444;
+
+    color: #ffffff;
+
+    font-family:
+        "Noto Sans JP",
+        sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 300;
+
+    padding: 15px 5px;
+
+    outline: none;
+
+    transition: 0.3s;
+
+}
+
+
+input[type="text"]:focus,
+textarea:focus {
+
+    border-color: #ffffff;
+
+}
+
+
+textarea {
+
+    border: 1px solid #444;
+
+    padding: 20px;
+
+    resize: vertical;
+
+    line-height: 1.8;
+
+}
+
+
+input::placeholder,
+textarea::placeholder {
+
+    color: #555;
+
+}
+
+
+
+/* ==========================
+   Photo Upload
+========================== */
+
+.photo-upload {
+
+    border: 1px dashed #444;
+
+    min-height: 180px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    transition: 0.3s;
+
+}
+
+
+.photo-upload:hover {
+
+    border-color: #888;
+
+}
+
+
+.photo-upload input {
+
+    display: none;
+
+}
+
+
+.upload-button {
+
+    display: inline-block;
+
+    padding: 14px 35px;
+
+    border: 1px solid #666;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    transition: 0.3s;
+
+}
+
+
+.upload-button:hover {
+
+    background: #ffffff;
+
+    color: #000000;
+
+}
+
+
+#file-name {
+
+    margin-top: 15px;
+
+    font-size: 11px;
+
+    color: #666;
+
+}
+
+
+
+/* ==========================
+   Preview
+========================== */
+
+#preview-area {
+
+    display: none;
+
+    margin-top: 20px;
+
+}
+
+
+#preview-area.show {
+
+    display: block;
+
+}
+
+
+#preview-image {
+
+    display: block;
+
+    width: 100%;
+
+    max-height: 500px;
+
+    object-fit: contain;
+
+    background: #111;
+
+}
+
+
+
+/* ==========================
+   Character Count
+========================== */
+
+.character-count {
+
+    text-align: right;
+
+    color: #555;
+
+    font-size: 11px;
+
+    margin-top: 8px;
+
+}
+
+
+
+/* ==========================
+   Submit
+========================== */
+
+.submit-button {
+
+    width: 100%;
+
+    height: 80px;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    border: 1px solid #555;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 0 30px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 20px;
+
+    letter-spacing: 5px;
+
+    transition: 0.4s;
+
+}
+
+
+.submit-button:hover {
+
+    background: #ffffff;
+
+    color: #000000;
+
+    border-color: #ffffff;
+
+}
+
+
+.arrow {
+
+    font-family:
+        "Noto Sans JP",
+        sans-serif;
+
+    font-size: 20px;
+
+}
+
+
+
+/* ==========================
+   Complete
+========================== */
+
+.complete-message {
+
+    display: none;
+
+    min-height: 500px;
+
+    text-align: center;
+
+    padding-top: 100px;
+
+}
+
+
+.complete-message.show {
+
+    display: block;
+
+    animation: fadeUp 1s ease forwards;
+
+}
+
+
+.complete-message h2 {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: clamp(40px, 6vw, 70px);
+
+    font-weight: 300;
+
+    line-height: 1.3;
+
+    margin-bottom: 35px;
+
+}
+
+
+.complete-message > p:not(.eyebrow) {
+
+    color: #999;
+
+    line-height: 2;
+
+    margin-bottom: 50px;
+
+}
+
+
+.complete-message a {
+
+    display: inline-block;
+
+    padding: 15px 40px;
+
+    border: 1px solid #555;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    transition: 0.3s;
+
+}
+
+
+.complete-message a:hover {
+
+    background: #ffffff;
+
+    color: #000000;
+
+}
+
+
+
+/* ==========================
+   Footer
+========================== */
+
+.submit-footer {
+
+    width: 90%;
+
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding: 40px 0 60px;
+
+    border-top: 1px solid #222;
+
+}
+
+
+.submit-footer p {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    letter-spacing: 4px;
+
+    font-size: 14px;
+
+}
+
+
+.submit-footer span {
+
+    display: block;
+
+    margin-top: 8px;
+
+    color: #555;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+}
+
+
+
+/* ==========================
+   Animation
+========================== */
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(30px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+
+/* ==========================
+   Mobile
+========================== */
+
+@media (max-width: 768px) {
+
+
+    .submit-header {
+
+        padding: 25px;
+
+    }
+
+
+    .logo {
+
+        font-size: 26px;
+
+    }
+
+
+    .submit-container {
+
+        width: 88%;
+
+        padding-top: 130px;
+
+    }
+
+
+    .submit-intro {
+
+        margin-bottom: 70px;
+
+    }
+
+
+    .submit-intro h1 {
+
+        font-size: 42px;
+
+    }
+
+
+    .form-group {
+
+        margin-bottom: 55px;
+
+    }
+
+
+    .form-group > label span {
+
+        display: block;
+
+        margin-left: 0;
+
+        margin-top: 5px;
+
+    }
+
+
+    .photo-upload {
+
+        min-height: 150px;
+
+    }
+
+
+    .submit-button {
+
+        height: 70px;
+
+    }
+
+}
