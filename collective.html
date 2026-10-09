@@ -386,15 +386,18 @@ const submissionMessage =
         "submission-message"
     );
 
-if (
-    params.get("submitted") === "1" &&
-    submissionMessage
-) {
-
-    submissionMessage.classList.add("show");
-
+if (params.get("submitted") === "1") {
+    if (submissionMessage) {
+        submissionMessage.classList.add("show");
+        console.log("受付完了メッセージを表示しました");
+    } else {
+        console.error(
+            "submission-message がHTML内に見つかりません"
+        );
+    }
+} else {
+    console.log("submitted=1 がURLにありません");
 }
-
 
 /* =================================
    実行
