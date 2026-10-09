@@ -476,6 +476,10 @@ body {
     line-height: 2;
 }
 
+.submission-message {
+    display: none;
+}
+
 .submission-message.show {
     display: block;
 }
