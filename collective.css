@@ -492,3 +492,11 @@ body {
     }
 
 }
+/* 受付完了メッセージの表示確認 */
+#submission-message.show {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative;
+    z-index: 10;
+}
