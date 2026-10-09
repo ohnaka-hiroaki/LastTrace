@@ -168,7 +168,7 @@ async function loadTraces() {
     try {
 
 
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
     .from("traces")
     .select("*")
     .eq("approved", true)
