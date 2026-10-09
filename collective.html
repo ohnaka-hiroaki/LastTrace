@@ -88,7 +88,23 @@
 
 <section class="trace-list"
          id="trace-list">
+<div id="submission-message" class="submission-message">
 
+    <p class="submission-eyebrow">
+        TRACE RECORDED
+    </p>
+
+    <h2>
+        あなたの風景を<br>
+        受け付けました。
+    </h2>
+
+    <p>
+        投稿された風景は確認後、<br>
+        COLLECTIVE TRACEに掲載されます。
+    </p>
+
+</div>
     <p class="loading">
         Loading traces...
     </p>
@@ -152,22 +168,11 @@ async function loadTraces() {
     try {
 
 
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-
-                .from("traces")
-
-                .select("*")
-
-                .order(
-                    "created_at",
-                    {
-                        ascending: false
-                    }
-                );
+        const { data, error } = await supabase
+    .from("traces")
+    .select("*")
+    .eq("approved", true)
+    .order("created_at", { ascending: false });
 
 
         if (error) {
@@ -367,7 +372,28 @@ function escapeHtml(value) {
         );
 
 }
+/* ==========================
+   Submission Message
+========================== */
 
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const submissionMessage =
+    document.getElementById(
+        "submission-message"
+    );
+
+if (
+    params.get("submitted") === "1" &&
+    submissionMessage
+) {
+
+    submissionMessage.classList.add("show");
+
+}
 
 
 /* =================================

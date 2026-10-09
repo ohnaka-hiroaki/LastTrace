@@ -291,7 +291,7 @@ const form =
 const photoInput =
     document.getElementById("photo");
 
-const fileName =
+const fileNameElement =
     document.getElementById("file-name");
 
 const previewArea =
@@ -322,7 +322,7 @@ photoInput.addEventListener("change", function () {
         return;
     }
 
-    fileName.textContent = file.name;
+    fileNameElement.textContent = file.name;
 
     const reader = new FileReader();
 
@@ -387,7 +387,44 @@ form.addEventListener("submit", async function (event) {
         return;
 
     }
+    
+// ==========================
+// File Security Check
+// ==========================
 
+// 許可する画像形式
+const allowedTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/webp"
+];
+
+// 最大5MB
+const maxFileSize = 5 * 1024 * 1024;
+
+
+// ファイル形式チェック
+if (!allowedTypes.includes(file.type)) {
+
+    alert(
+        "JPG・PNG・WebP形式の画像のみ投稿できます。"
+    );
+
+    return;
+
+}
+
+
+// ファイルサイズチェック
+if (file.size > maxFileSize) {
+
+    alert(
+        "写真のサイズは5MB以下にしてください。"
+    );
+
+    return;
+
+}
 
     try {
 
@@ -396,9 +433,9 @@ form.addEventListener("submit", async function (event) {
          */
 
         const fileExtension =
-            file.name.split(".").pop();
+            file.name.split(".").pop().toLowerCase();
 
-        const fileName =
+        const uploadedFileName =
             `${Date.now()}-${crypto.randomUUID()}.${fileExtension}`;
 
 
@@ -414,7 +451,7 @@ form.addEventListener("submit", async function (event) {
                 .storage
                 .from("traces")
                 .upload(
-                    fileName,
+                    uploadedFileName,
                     file
                 );
 
@@ -436,7 +473,9 @@ form.addEventListener("submit", async function (event) {
             supabaseClient
                 .storage
                 .from("traces")
-                .getPublicUrl(fileName);
+                .getPublicUrl(
+                    uploadedFileName
+                );
 
 
         const imageUrl =
@@ -445,6 +484,9 @@ form.addEventListener("submit", async function (event) {
 
         /*
          * 4. データベースへ保存
+         *
+         * approvedは指定しない。
+         * Supabase側で自動的にfalseになる。
          */
 
         const {
@@ -477,20 +519,13 @@ form.addEventListener("submit", async function (event) {
 
 
         /*
-         * 5. 完了画面
+         * 5. 投稿完了
+         *
+         * Collectiveへ移動
          */
 
-        form.style.display = "none";
-
-        completeMessage.classList.add("show");
-
-        window.scrollTo({
-
-            top: 0,
-
-            behavior: "smooth"
-
-        });
+        window.location.href =
+            "collective.html?submitted=1";
 
 
     } catch (error) {
