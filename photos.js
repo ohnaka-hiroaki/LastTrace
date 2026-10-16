@@ -91,7 +91,7 @@ const photos = [
 
       film: "Kodak gold 200",
 
-      setting: "F8 / 1-320 / ISO200",
+      settings: "F8 / 1-320 / ISO200",
 
       description:
       ""
@@ -114,7 +114,7 @@ const photos = [
 
       film: "Kodak Gold 200",
 
-      setting: "F8 / 1-320 / ISO200",
+      settings: "F8 / 1-320 / ISO200",
 
       description:
       "古い自動販売機と公衆電話が並ぶ、日本の日常的な街角。"
@@ -137,7 +137,7 @@ const photos = [
 
       film: "Kodak Gold 200",
 
-      setting: "F8 / 1-320 / ISO200",
+      settings: "F8 / 1-320 / ISO200",
 
       description:
       "赤提灯と暖簾が、懐かしい記憶を呼び起こす。"
@@ -160,7 +160,7 @@ const photos = [
 
       film: "Kodak Gold 200",
 
-      setting: "F8 / 1-320 / ISO200",
+      settings: "F8 / 1-320 / ISO200",
 
       description:
       "古いカラオケ喫茶が、静かに開店を待つ街角。"
@@ -183,7 +183,7 @@ const photos = [
 
       film: "Kodak Gold 200",
 
-      setting: "F8 / 1-320 / ISO200",
+      settings: "F8 / 1-320 / ISO200",
 
       description:
       "暗い青色の天井を照らす、暖かな裸電球。"
@@ -206,7 +206,7 @@ const photos = [
 
       film: "Kodak Gold 200",
 
-      setting: "F8 / 1-320 / ISO200",
+      settings: "F8 / 1-320 / ISO200",
 
       description:
       "昭和の面影を留める商店街の一角。使い込まれた看板とシャッターが魅せる、日常のノスタルジー。"
@@ -229,7 +229,7 @@ const photos = [
 
       film: "Kodak Gold 200",
 
-      setting: "F8 / 1-320 / ISO200",
+      settings: "F8 / 1-320 / ISO200",
 
       description:
       "夕暮れの柔らかな光が差し込む山間の集会所前。"
