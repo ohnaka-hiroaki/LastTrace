@@ -234,6 +234,28 @@ const photos = [
       description:
       "夕暮れの柔らかな光が差し込む山間の集会所前。"
    },
-      
 
+   {
+      id: 11,
+
+      title: "季節を重ねる場所",
+
+      image: "images/photo11.JPG",
+
+      location: "鹿児島県垂水市新御堂",
+
+      date: "2026.10.27",
+
+      camera: "iPhone16e",
+
+      lens: "",
+
+      film: "Camera app",
+
+      settings: "",
+
+      description:
+      "木々が重なり合い、自然のトンネルのようになった小道。頭上から差し込む光が地面を照らし、静かな時間が流れている。何気なく通り過ぎてしまうような場所にも、季節とともに変わりゆく風景がある。"
+   },
+   
 ];
