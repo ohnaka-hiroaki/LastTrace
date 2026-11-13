@@ -746,3 +746,17 @@ textarea::placeholder {
     max-width: 100%;
     margin: 0 auto;
 }
+/* ==========================
+   Submit Loading
+========================== */
+
+.submit-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.submit-button:disabled:hover {
+    background: transparent;
+    color: #ffffff;
+    border-color: #555;
+}
