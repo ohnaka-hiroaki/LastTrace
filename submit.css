@@ -721,3 +721,28 @@ textarea::placeholder {
     }
 
 }
+/* ==========================
+   Photo Upload Improvement
+========================== */
+
+.upload-button {
+    background: transparent;
+    color: #ffffff;
+}
+
+#file-name {
+    max-width: 90%;
+    text-align: center;
+    overflow-wrap: anywhere;
+    line-height: 1.8;
+}
+
+#preview-area {
+    padding: 15px;
+    border: 1px solid #222;
+}
+
+#preview-image {
+    max-width: 100%;
+    margin: 0 auto;
+}
