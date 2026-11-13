@@ -309,6 +309,11 @@ const count =
 const completeMessage =
     document.getElementById("complete-message");
 
+    const submitButton =
+    document.querySelector(".submit-button");
+
+const originalButtonHTML =
+    submitButton.innerHTML;
 
 /* ==========================
    Photo Preview
@@ -427,7 +432,13 @@ if (file.size > maxFileSize) {
 }
 
     try {
+// 送信中の表示
+submitButton.disabled = true;
 
+submitButton.innerHTML = `
+    <span>送信中...</span>
+    <span class="arrow">...</span>
+`;
         /*
          * 1. ファイル名を作る
          */
@@ -528,7 +539,7 @@ if (file.size > maxFileSize) {
             "collective.html?submitted=1";
 
 
-    } catch (error) {
+        } catch (error) {
 
         console.error(error);
 
@@ -536,6 +547,13 @@ if (file.size > maxFileSize) {
             "投稿に失敗しました。\n" +
             "もう一度試してください。"
         );
+
+    } finally {
+
+        // 送信終了後にボタンを元に戻す
+        submitButton.disabled = false;
+
+        submitButton.innerHTML = originalButtonHTML;
 
     }
 
