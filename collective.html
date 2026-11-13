@@ -216,74 +216,68 @@ async function loadTraces() {
                 "trace-item";
 
 
-            article.innerHTML = `
+            
+article.innerHTML = `
 
-                <div class="trace-image">
+    <div class="trace-image">
 
-                    <img
-                        src="${trace.image_url}"
-                        alt="${escapeHtml(trace.title)}"
-                        loading="lazy"
-                    >
+        <img
+            src="${escapeHtml(trace.image_url)}"
+            alt="${escapeHtml(trace.title)}"
+            loading="lazy"
+        >
 
-                </div>
-
-
-                <div class="trace-info">
+    </div>
 
 
-                    <p class="trace-number">
+    <div class="trace-info">
 
-                        TRACE
+        <p class="trace-number">
+            COLLECTIVE TRACE
+        </p>
 
-                    </p>
+        <h2>
+            ${escapeHtml(trace.title)}
+        </h2>
 
+        <div class="trace-meta">
 
-                    <h2>
+            ${
+                trace.location
+                    ? `<span>${escapeHtml(trace.location)}</span>`
+                    : ""
+            }
 
-                        ${escapeHtml(trace.title)}
+            ${
+                trace.date
+                    ? `<span>${escapeHtml(trace.date)}</span>`
+                    : ""
+            }
 
-                    </h2>
+        </div>
 
+        <div class="trace-memory-area">
 
-                    <div class="trace-meta">
+            <p class="memory-label">
+                この風景を残したい理由
+            </p>
 
-                        ${
-                            trace.location
-                                ? `<span>${escapeHtml(trace.location)}</span>`
-                                : ""
-                        }
+            <p class="trace-memory">
+                ${escapeHtml(trace.memory)}
+            </p>
 
-                        ${
-                            trace.date
-                                ? `<span>${escapeHtml(trace.date)}</span>`
-                                : ""
-                        }
+        </div>
 
-                    </div>
+        <p class="trace-name">
+            — 投稿者：${trace.name
+                ? escapeHtml(trace.name)
+                : "匿名"}
+        </p>
 
+    </div>
 
-                    <p class="trace-memory">
+`;
 
-                        ${escapeHtml(trace.memory)}
-
-                    </p>
-
-
-                    ${
-                        trace.name
-                            ? `
-                                <p class="trace-name">
-
-                                    — ${escapeHtml(trace.name)}
-
-                                </p>
-                              `
-                            : ""
-                    }
-
-
-                </div>
 
             `;
 
