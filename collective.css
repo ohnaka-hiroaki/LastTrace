@@ -31,6 +31,11 @@ body {
    Header - Common Design
 ================================= */
 
+
+/* =================================
+   Header - Common Design
+================================= */
+
 .collective-header {
     position: fixed;
     top: 0;
@@ -39,18 +44,22 @@ body {
     width: 100%;
     height: 80px;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 max(5%, calc((100% - 1200px) / 2));
-
     z-index: 1000;
 
     background: rgba(17, 17, 17, .82);
     backdrop-filter: blur(14px);
 
     transition: .4s;
+}
+
+.collective-header .header-container {
+    width: min(90%, 1200px);
+    height: 80px;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .collective-header .logo {
@@ -74,6 +83,21 @@ body {
 
 .collective-header .submit-link:hover {
     color: #ffffff;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .collective-header .header-container {
+        width: 90%;
+        height: 80px;
+    }
+
+    .collective-header .logo {
+        font-size: 34px;
+    }
+
 }
 
 
