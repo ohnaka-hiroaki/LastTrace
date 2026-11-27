@@ -404,18 +404,6 @@ body {
 @media (max-width: 768px) {
 
 
-    .collective-header {
-        height: 70px;
-
-        padding: 0 20px;
-    }
-
-
-    .logo {
-        font-size: 24px;
-    }
-
-
     .collective-intro {
         padding:
             100px 20px
