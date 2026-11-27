@@ -683,19 +683,6 @@ textarea::placeholder {
 @media (max-width: 768px) {
 
 
-    .submit-header {
-
-        padding: 25px;
-
-    }
-
-
-    .logo {
-
-        font-size: 26px;
-
-    }
-
 
     .submit-container {
 
