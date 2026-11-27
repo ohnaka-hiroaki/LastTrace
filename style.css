@@ -588,7 +588,93 @@ footer small{
     }
 
 }
+/* ==========================================
+   Cinematic Opening Animation
+========================================== */
 
+/* 背景画像 */
+
+@keyframes heroBackground {
+
+    0% {
+        opacity: 0;
+        transform: scale(1.12);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+/* タイトル・文章 */
+
+@keyframes cinematicFade {
+
+    0% {
+        opacity: 0;
+        transform: translateY(25px);
+        filter: blur(8px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+
+}
+
+
+.hero h1,
+.hero-subtitle,
+.hero-copy,
+.hero-button {
+
+    opacity: 0;
+
+    animation: cinematicFade 1.4s ease forwards;
+
+}
+
+
+.hero h1 {
+    animation-delay: 1.0s;
+}
+
+.hero-subtitle {
+    animation-delay: 1.5s;
+}
+
+.hero-copy {
+    animation-delay: 2.0s;
+}
+
+.hero-button {
+    animation-delay: 2.5s;
+}
+
+
+/* 動きを控える設定のユーザーへの配慮 */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hero::before,
+    .hero h1,
+    .hero-subtitle,
+    .hero-copy,
+    .hero-button {
+
+        animation: none;
+        opacity: 1;
+        transform: none;
+        filter: none;
+
+    }
+
+}
 /* ==========================
    Participation
 ========================== */
