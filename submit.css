@@ -838,3 +838,32 @@ textarea::placeholder {
     line-height: 2.2;
     color: #666;
 }
+
+/* =================================
+   Header Responsive Adjustment
+================================= */
+
+@media (max-width: 768px) {
+
+    .submit-header {
+        height: 80px;
+        padding: 0;
+    }
+
+    .submit-header .header-container {
+        width: 90%;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 80px;
+        padding: 0;
+    }
+
+    .submit-header .logo {
+        font-size: 34px;
+    }
+
+    .submit-header .back-link {
+        font-size: 11px;
+    }
+
+}
