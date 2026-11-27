@@ -42,24 +42,55 @@ body {
    Header
 ========================== */
 
+
+/* ==========================
+   Header
+========================== */
+
 .submit-header {
-
     position: fixed;
-
     top: 0;
     left: 0;
-
     width: 100%;
-
-    padding: 35px 60px;
-
+    height: 80px;
+    padding: 0;
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
+    z-index: 1000;
 
-    z-index: 10;
+    background: rgba(17, 17, 17, .82);
+    backdrop-filter: blur(14px);
+}
+
+.submit-header .header-container {
+    width: min(90%, 1200px);
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.submit-header .logo {
+    color: #ffffff;
+    text-decoration: none;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 34px;
+    letter-spacing: 2px;
+}
+
+.submit-header .back-link {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 3px;
+    transition: .3s;
+}
+
+.submit-header .back-link:hover {
+    color: #ffffff;
+}
+
 
 }
 
